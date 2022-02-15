@@ -21,14 +21,12 @@ void bubble_sort(int *array, size_t size)
 			array[i + 1] = tmp;
 			print_array(array, size);
 		}
-		else if ((i + 2) == sz)
+		if ((i + 2) == sz)
 		{
-			i = 0;
+			i = -1;
 			sz--;
+			/* printf(" %ld ------------\n", sz);*/
 		}
-		else
-		{
-			i++;
-		}
+		i++;
 	}
 }
