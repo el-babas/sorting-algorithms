@@ -9,11 +9,11 @@
  */
 void bubble_sort(int *array, size_t size)
 {
-	unsigned int i = 0, j = 0, tmp = 0, sz = size - 1;
+	size_t i = 0, j = 0, tmp = 0;
 
-	for (i = 0; i < sz; i++)
+	for (i = 0; i < size; i++)
 	{
-		for (j = 0; j < sz - i; j++)
+		for (j = 0; j < size - i; j++)
 		{
 			/* Info: At each completion of the loop one less element is taken */
 			if (array[j] > array[j + 1])
