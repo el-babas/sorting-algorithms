@@ -10,7 +10,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *current, *swap;
 
-	if (list == NULL)
+	if (list == NULL || *list == NULL)
 		return;
 
 	current = *list;
@@ -23,20 +23,25 @@ void insertion_sort_list(listint_t **list)
 				break;
 
 			swap = current->next;
+
 			/* Info: Swap nodes */
 			current->next = swap->next;
 			swap->prev = current->prev;
+
 			if (current->prev != NULL)
 				current->prev->next = swap;
 			if (swap->next != NULL)
 				swap->next->prev = current;
+
 			current->prev = swap;
 			swap->next = current;
+
 			/* Info: The pointer is reassigned */
 			if (swap->prev != NULL)
 				current = swap->prev;
 			else
 				*list = swap;
+				
 			print_list(*list);
 		}
 		current = current->next;
