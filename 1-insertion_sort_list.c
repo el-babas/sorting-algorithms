@@ -19,30 +19,25 @@ void insertion_sort_list(listint_t **list)
 		while (current->next != NULL)
 		{
 			/* Info: Comparate values of nodes */
-			if (current->n > current->next->n)
-			{
-				swap = current->next;
+			if (current->n < current->next->n)
+				break;
 
-				/* Info: Swap nodes */
-				current->next = swap->next;
-				swap->prev = current->prev;
-
-				if (current->prev != NULL)
-					current->prev->next = swap;
-				if (swap->next != NULL)
-					swap->next->prev = current;
-
-				current->prev = swap;
-				swap->next = current;
-
-				/* Info: The pointer is reassigned */
-				if (swap->prev != NULL)
-					current = swap->prev;
-				else
-					*list = swap;
-
-				print_list(*list);
-			}
+			swap = current->next;
+			/* Info: Swap nodes */
+			current->next = swap->next;
+			swap->prev = current->prev;
+			if (current->prev != NULL)
+				current->prev->next = swap;
+			if (swap->next != NULL)
+				swap->next->prev = current;
+			current->prev = swap;
+			swap->next = current;
+			/* Info: The pointer is reassigned */
+			if (swap->prev != NULL)
+				current = swap->prev;
+			else
+				*list = swap;
+			print_list(*list);
 		}
 		current = current->next;
 	}
