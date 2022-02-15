@@ -8,42 +8,41 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *swap;
+	listint_t *head, *current, *swap;
 
-	if (list == NULL || *list == NULL || !((*list)->next))
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	current = *list;
-	while (current != NULL)
+	head = (*list)->next;
+	while (head != NULL)
 	{
-		while (current->next != NULL)
+		current = head;
+		swap = head->prev;
+		/* Info: Comparate values of nodes */
+		while (swap != NULL && (current->n < swap->n))
 		{
-			/* Info: Comparate values of nodes */
-			if (current->n < current->next->n)
-				break;
-
-			swap = current->next;
-
 			/* Info: Swap nodes */
-			current->next = swap->next;
-			swap->prev = current->prev;
+			swap->next = current->next;
 
-			if (current->prev != NULL)
-				current->prev->next = swap;
-			if (swap->next != NULL)
-				swap->next->prev = current;
+			if (current->next != NULL)
+				current->next->prev = swap;
 
-			current->prev = swap;
-			swap->next = current;
+			current->prev = swap->prev;
+			current->next = swap;
+
+			if (swap->prev != NULL)
+				swap->prev->next = current;
+			else
+				*list = current;
+
+			swap->prev = current;
 
 			/* Info: The pointer is reassigned */
-			if (swap->prev != NULL)
-				current = swap->prev;
-			else
-				*list = swap;
+			swap = current->prev;
 
+			/* Info: Prints the doubly linked list */
 			print_list(*list);
 		}
-		current = current->next;
+		head = head->next;
 	}
 }
